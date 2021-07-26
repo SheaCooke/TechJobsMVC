@@ -183,3 +183,7 @@ label {
 .centered {
     text-align: center;
 }
+
+.makeBold{
+    font-weight: bold;
+}
