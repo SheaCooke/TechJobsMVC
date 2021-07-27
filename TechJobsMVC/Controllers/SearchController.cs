@@ -11,12 +11,13 @@ namespace TechJobsMVC.Controllers
 {
     public class SearchController : Controller
     {
-        
+
+        public List<Job> jobs;
 
         // GET: /<controller>/
         public IActionResult Index()
         {
-            
+            ViewBag.selectedButton = "";
             ViewBag.columns = ListController.ColumnChoices;
             return View();
         }
@@ -27,11 +28,13 @@ namespace TechJobsMVC.Controllers
         
         public IActionResult Results(string searchType, string searchTerm)
         {
-             List<Job> jobs;
+             
+            //ViewBag.selectedButton = "";
 
             if (string.IsNullOrEmpty(searchTerm))
             {
                 jobs = JobData.FindAll();
+                
                 
                 
                 
@@ -44,10 +47,21 @@ namespace TechJobsMVC.Controllers
             }
                 ViewBag.jobs = jobs;
                 ViewBag.columns = ListController.ColumnChoices;
-                 //return Redirect("/Search/Index");
+            
+                
                 return View("Index");
             
 
+        }
+
+
+        public IActionResult HyperLink(string searchTerm)
+        {
+            jobs = JobData.FindByValue(searchTerm);
+            ViewBag.jobs = jobs;
+            ViewBag.columns = ListController.ColumnChoices;
+
+            return View("Index");
         }
     }
 
