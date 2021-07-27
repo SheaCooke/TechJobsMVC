@@ -39,12 +39,16 @@
             <tbody>
                 @foreach (var i in ViewBag.jobs)
                 {
+                    string employer = String.Format("{0}", i.Employer);
+                    string location = String.Format("{0}", i.Location);
+                    string position = String.Format("{0}", i.PositionType);
+                    string cc = String.Format("{0}", i.CoreCompetency);
                     <tr>
 
                         <td>
-                            ID: @i.Id  <br />Name: @i.Name <br />Employer:@i.Employer        
-                            <br />Location: @i.Location <br />Position: @i.PositionType
-                            <br />Core Competency: @i.CoreCompetency
+                            ID: @i.Id  <br />Name: @i.Name <br />Employer:@Html.ActionLink(employer, "HyperLink", "Search", routeValues: new { searchTerm = i.Employer })
+                            <br />Location:@Html.ActionLink(location, "HyperLink", "Search", routeValues: new { searchTerm = i.Location })  <br />Position: @Html.ActionLink(position, "HyperLink", "Search", routeValues: new { searchTerm = i.PositionType })
+                            <br />Core Competency:@Html.ActionLink(cc, "HyperLink", "Search", routeValues: new { searchTerm = i.CoreCompetency })
                         </td>
 
 
